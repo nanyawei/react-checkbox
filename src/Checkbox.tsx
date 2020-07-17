@@ -11,6 +11,7 @@ export interface CheckboOptionType {
 }
 
 export interface BasicCheckboxProps<T> {
+  prefix?: string;
   className?: string;
   defaultChecked?: boolean;
   children?: React.ReactNode;
@@ -20,6 +21,7 @@ export interface BasicCheckboxProps<T> {
   onClick?: React.MouseEventHandler<HTMLElement>;
   onChange?: (e: T) => void;
   value?: ValueType;
+  partial?: boolean; // 是否为半选状态
 }
 
 export interface CheckboxChangeEventTarget extends BasicCheckboxProps<CheckboxChangeEvent> {
@@ -38,7 +40,7 @@ const Checkbox: React.FC<BasicCheckboxProps<CheckboxChangeEvent>> = (props) => {
   const {
     children, disabled, required, checked = false, onClick, onChange,
     className, defaultChecked = false,
-    value
+    value, prefix = PREFIXClS, partial= false
   } = props;
   const [checkboxChecked, setCheckboxChecked] = useState(false);
 
@@ -46,13 +48,14 @@ const Checkbox: React.FC<BasicCheckboxProps<CheckboxChangeEvent>> = (props) => {
     setCheckboxChecked(() => 'checked' in props ? checked : defaultChecked);
   }, [checked, defaultChecked]);
 
-  const classString = cls(`${PREFIXClS}-label`, className, {
-    [`${PREFIXClS}-checked`]: checkboxChecked,
-    [`${PREFIXClS}-disabled`]: disabled
+  const classString = cls(`${prefix}-label`, className, {
+    [`${prefix}-checked`]: checkboxChecked,
+    [`${prefix}-disabled`]: disabled,
+    [`${prefix}-partial`]: partial
   });
 
   return <label className={classString}>
-    <span className={`${PREFIXClS}-input-box`}>
+    <span className={`${prefix}-input-box`}>
       <input
         type='checkbox'
         checked={checkboxChecked}
@@ -77,9 +80,9 @@ const Checkbox: React.FC<BasicCheckboxProps<CheckboxChangeEvent>> = (props) => {
         }}
         value={value}
       />
-      <span className={`${PREFIXClS}-input-inner`}></span>
+      <span className={`${prefix}-input-inner`}></span>
     </span>
-    <span className={`${PREFIXClS}-content-box`}>{children}</span>
+    <span className={`${prefix}-content-box`}>{children}</span>
   </label>
 };
 

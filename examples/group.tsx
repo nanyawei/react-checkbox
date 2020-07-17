@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../assets/index.less';
 import Checkbox from '../src';
 
@@ -24,6 +24,15 @@ const value = ['b'];
 const Group = () => {
   const [checkAll, setCheckAll] = useState(false);
   const [checkList, setCheckList] = useState(value);
+  const [partial, setPartial] = useState(false);
+
+  useEffect(() => {
+    if (checkAll) {
+      return setPartial(false);
+    }
+    setPartial(!!checkList.length);
+
+  }, [checkAll, checkList]);
 
   return <div style={{ backgroundColor: '#fff' }}>
     <Checkbox.Group
@@ -48,6 +57,7 @@ const Group = () => {
 
     <Checkbox
       checked={checkAll}
+      partial={partial}
       onChange={(e) => {
         setCheckAll(e.target.checked);
         setCheckList(e.target.checked ? options : []);
