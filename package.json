@@ -1,0 +1,25 @@
+{
+  "name": "react-checkbox",
+  "version": "1.0.0",
+  "description": "react component checkbox typescript",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "rm -rf .storybook lib es && father doc dev --storybook",
+    "build": "father doc build --storybook",
+    "doc": "father doc dev"
+  },
+  "author": "wyn",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/classnames": "^2.2.10",
+    "classnames": "^2.2.6",
+    "father": "^2.29.5",
+    "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "@types/react": "^16.9.41",
+    "@types/react-dom": "^16.9.8",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
