@@ -2,7 +2,8 @@
   "name": "react-checkbox",
   "version": "1.0.0",
   "description": "react component checkbox typescript",
-  "main": "src/index.ts",
+  "main": "lib/index",
+  "module": "es/index",
   "scripts": {
     "start": "rm -rf .storybook lib es && father doc dev --storybook",
     "build": "father doc build --storybook",
